@@ -18,7 +18,7 @@ func HomeRouterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	var port = "9000"
+	var port = "80"
 	fmt.Println("Server start on port #" + port + "\n")
 	http.HandleFunc("/", HomeRouterHandler)
 	err := http.ListenAndServe(":" + port, nil)

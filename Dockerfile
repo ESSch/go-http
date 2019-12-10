@@ -8,5 +8,5 @@ WORKDIR /root/
 RUN apk add --update curl \
     && rm -rf /var/cache/apk/*
 COPY --from=builder /go/src/app/main /root
-EXPOSE 9000
+EXPOSE 80
 CMD ["./main"]
