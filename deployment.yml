@@ -1,0 +1,50 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: default
+spec:
+  type: LoadBalancer
+  ports:
+  - name: front
+    port: 80
+    targetPort: 80
+  selector:
+    app: lamp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxlamp
+spec:
+  selector:
+    matchLabels:
+      app: lamp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lamp
+    spec:
+      containers:
+      - name: lamp
+        image: gcr.io/clever-rite-254314/go-http:3c407ae7bba9bee417a0755c2799e2d0289b9fae
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          exec:
+            command:
+            - curl
+            - -f
+            - localhost:80/ping
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - curl
+            - -f
+            - localhost:80/
+          initialDelaySeconds: 15
+          periodSeconds: 5
