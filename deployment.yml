@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: lamp
-        image: gcr.io/clever-rite-254314/go-http:3c407ae7bba9bee417a0755c2799e2d0289b9fae
+        image: gcr.io/clever-rite-254314/go-http
         ports:
         - containerPort: 80
         readinessProbe:

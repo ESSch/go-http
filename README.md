@@ -1,10 +1,9 @@
 Example configuration is:
 ```
 ls
-main.tf
-prod.tf
+prod.sh
 prod_key.json
-test.tf
+test.sh
 test_key.json
 ```
 ```
@@ -30,10 +29,15 @@ variable "id_project" {
 Example using is:
 
 You need to activate ``Kubernetes Engine`` in ``https://console.cloud.google.com/cloud-build/settings``.
-Create file ``main.tf``, terraform values and download a GCP key as myproject_key.json.
-Run command: 
+Create prod env: 
 ```
+source prod.sh
 terraform init
-terraform apply -var-file="prod.tvars" # run prod env
-terraform apply -var-file="test.tvars" # run test env
+suorce run.sh
+```
+Create test env: 
+```
+source test.sh
+terraform init
+suorce run.sh
 ```
